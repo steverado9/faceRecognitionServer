@@ -1,15 +1,26 @@
-const handleProfileGet = (req, res, db) => {
+const handleProfileGet = async (req, res, db) => {
     const { id } = req.params;
-    db.select('*').from('users').where({id})
-    .then(user => {
+    try {
+        const user = await db.select('*').from('users').where({ id })
         if (user.length) {
             res.json(user[0])
         } else {
             res.status(400).json('Not found')
         }
-    })
-    .catch(err => res.status(400).json('error getting user'))
+    } catch (err) {
+        console.log(res.status(400).json('error getting user'));
+    }
 }
+
+// db.select('*').from('users').where({id})
+// .then(user => {
+//     if (user.length) {
+//         res.json(user[0])
+//     } else {
+//         res.status(400).json('Not found')
+//     }
+// })
+// .catch(err => res.status(400).json('error getting user'))
 
 module.exports = {
     handleProfileGet

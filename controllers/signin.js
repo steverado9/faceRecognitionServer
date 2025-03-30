@@ -41,7 +41,4 @@ const handleSignin = (db, bcrypt) => async (req, res) => {
 
 }
 
-module.exports = {
-
-    handleSignin
-}
+module.exports = { handleSignin }
